@@ -2,7 +2,7 @@
 // Informations d'identification
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
+define('DB_PASSWORD', 'aze');
 define('DB_NAME', 'borabora');
 
 // Connexion à la base de données MySQL
