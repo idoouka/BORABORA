@@ -73,7 +73,7 @@ if (!empty($type)) {
         echo $row['durée']. ' minutes';
         echo '</td>';
         echo '<td>';
-        echo $row['prix']. ' €';
+        echo $row['prix']. ' CFP';
         echo '</td>';
         echo '<td>';
         echo 'Voir le calendrier';
