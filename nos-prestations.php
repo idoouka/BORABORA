@@ -86,7 +86,7 @@ session_start();
               <li>Le sauna, jacuzzi et la piscine sont en accès libre  aux utilisateurs du SPA (droit d’entrée 3500FCFP, gratuit à toutes personnes faisant un soin).</li>
             </ul>
             <div class="grid_12">
-                <a href="spa.php" class="button">Réserver</a>
+                <a href="spa.php" class="button">Reserver</a>
             </div>
         </div>
       </div>
