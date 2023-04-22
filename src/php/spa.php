@@ -1,8 +1,17 @@
 <?php
-require_once 'connexion/config.php';
+
+use Entity\dbconnect;
+
+require_once 'Entity/dbconnect.php';
 
 // Initialisation de la variable $type
 $type = '';
+
+// Crée une instance de la classe dbconnect
+$db = new dbconnect();
+
+//On utilise la methode getConnection() pour se connecter à la base de données
+$conn = $db->getConnection();
 
 // Vérifie si le formulaire a été soumis
 if (isset($_POST['type'])) {
