@@ -10,18 +10,44 @@ parse_str($query, $params);
 
 // Définit les routes de l'application
 $routes = array(
-    '/' => 'src/php/home.php',
-    '/about' => 'src/php/a-propos.php',
-    '/prestations' => 'src/php/nos-prestations.php',
-    '/tarifs' => 'src/php/nos-tarifs.php',
-    '/spa' => 'src/php/spa.php',
-    '/reservation' => 'src/php/reservation.php',
-    '/login' => 'src/php/connexion/login.php',
-    '/logout' => 'src/php/connexion/logout.php',
-    '/register' => 'src/php/connexion/register.php',
-    '/dashboard' => 'src/php/dashboard.php',
+    '/' => array(
+        'file' => 'src/php/home.php'
+    ),
+    '/about' => array(
+        'file' => 'src/php/a-propos.php'
+    ),
+    '/prestations' => array(
+        'file' => 'src/php/nos-prestations.php'
+    ),
+    '/tarifs' => array(
+        'file' => 'src/php/nos-tarifs.php'
+    ),
+    '/spa' => array(
+        'file' => 'src/php/spa.php'
+    ),
+    '/reservation' => array(
+        'file' => 'src/php/reservation.php'
+    ),
+    '/login' => array(
+        'file' => 'src/php/connexion/login.php'
+    ),
+    '/logout' => array(
+        'file' => 'src/php/connexion/logout.php'
+    ),
+    '/register' => array(
+        'file' => 'src/php/connexion/register.php'
+    ),
+    '/dashboard' => array(
+        'file' => 'src/php/dashboard.php'
+    ),
+    '/dashboard/user' => array(
+        'file' => 'src/php/user.php',
+        'function' => 'test'
+    ),
 
-    '/404' => 'src/php/404.php'
+    '/404' => array(
+        'file' => 'src/php/404.php'
+    )
 );
 
 // Vérifie si l'URL demandée correspond à une route définie
@@ -32,8 +58,28 @@ if (array_key_exists($path, $routes)) {
     include 'src/php/utils.php';
     $_SESSION['path'] = $path;
 
-    // Inclut le fichier correspondant à la route
-    include $routes[$path];
+    // Récupère le fichier correspondant à la route
+    // $route permet de récupérer le tableau associatif de la route
+    // $file permet de récupérer la valeur de la clé 'file' du tableau associatif
+    // $function permet de récupérer la valeur de la clé 'function' du tableau associatif
+    $route = $routes[$path];
+    $file = $route['file'];
+
+    // Vérifie si une fonction est spécifiée pour la route
+    // Si il y a une fonction, on l'appelle
+    if (isset($route['function'])) {
+        // Inclut le fichier correspondant à la route
+        include $file;
+
+        // Appelle la fonction spécifiée pour la route
+        $function = $route['function'];
+        // Appelle la fonction
+        $function();
+    } else {
+        // Inclut le fichier correspondant à la route
+        // Si il n'y a pas de fonction, on inclut simplement le fichier
+        include $file;
+    }
 } else {
     // Affiche une page d'erreur 404
     include 'src/php/404.php';
