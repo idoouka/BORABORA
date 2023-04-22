@@ -1,3 +1,34 @@
+<style>
+    nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    nav li {
+        position: relative;
+    }
+
+    nav ul ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: -20px;
+        width: calc(100% + 50px);
+        height: calc(100% + 70px);
+        z-index: 1;
+        background-color: #323337;
+    }
+
+    nav ul li:hover > ul {
+        display: inherit;
+    }
+
+</style>
+<!------------------------------------------------------------------------------------------------------------------>
 <header>
     <div>
         <div>
@@ -11,10 +42,15 @@
                         <a href="/about">A propos</a>
                     </li>
                     <li>
-                        <a href="/prestations">Nos prestations</a>
-                    </li>
-                    <li>
-                        <a href="/tarifs">Nos tarifs</a>
+                        <a href="#">Services</a>
+                        <ul>
+                            <li>
+                                <a href="/prestations">Nos prestations</a>
+                            </li>
+                            <li>
+                                <a href="/tarifs">Nos tarifs</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="#">Calendrier</a>
@@ -22,6 +58,11 @@
                     <li>
                         <a href="#">Contacts</a>
                     </li>
+                    <?php
+                    if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
+                        echo "<li><a class='current' href='/dashboard'>Dashboard</a></li>";
+                    }
+                    ?>
                     <?php
                     if (isset($_SESSION['username'])) {
 
