@@ -20,8 +20,7 @@
                 <img src="/src/img/32066996.jpg" alt="Vue plage - Hôtel"/>
                 <div class="banner">
                     <p class="text-1a">Un emplacement <strong>Idéal !</strong></p>
-                    <p class="text-2">Ut ééééwisi enim ahd minim veniam quis nostrud exerci takltion ulamc orper
-                        suscipit lobortis</p>
+                    <p class="text-2">Harmanin Baba nerde çarsafim, ta les cramptes ?</p>
                 </div>
             </li>
 
