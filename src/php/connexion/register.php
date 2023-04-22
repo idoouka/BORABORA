@@ -1,66 +1,80 @@
 <?php
-require('config.php');
+use Entity\dbconnect;
+
+require_once path_php.'Entity/dbconnect.php';
+
+// Crée une instance de la classe dbconnect
+$db = new dbconnect();
+
+//On utilise la methode getConnection() pour se connecter à la base de données
+$conn = $db->getConnection();
+
+if (isset($_REQUEST['username'],$_REQUEST['email'],$_REQUEST['password'],$_REQUEST['password2'])) {
+    $username = $_REQUEST['username'];
+    $email = $_REQUEST['email'];
+    $password = $_REQUEST['password'];
+    $password2 = $_REQUEST['password2'];
+
+    if ($password == $password2) {
+        // Prépare la requête SQL
+        $stmt = $conn->prepare("SELECT username FROM users WHERE username = :username");
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+
+        // Vérifie si la requête a renvoyé un résultat
+        if ($stmt->rowCount() == 0) {
+            $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':email', $email);
+            $hash = hash('sha256', $password);
+            $stmt->bindParam(':password', $hash);
+            $stmt->execute();
+
+            // Redirige l'utilisateur vers la page de connexion
+            header("Location: /login");
+            exit;
+        } else {
+            $message = "Ce nom d'utilisateur est déjà utilisé.";
+        }
+    } else {
+        $message = "Les mots de passe ne correspondent pas.";
+    }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>A propos - Le Bora-Bora</title>
+    <title>Inscription - Le Bora-Bora</title>
     <?php
-    include_once path_php . 'include/head.php';
+    include_once path_php.'include/head.php';
     ?>
 </head>
+
 <body>
-<?php include_once path_php . 'include/navbar.php' ?>
+<?php include_once path_php.'include/navbar.php' ?>
+
+
+<div class="login">
+    <div class="login-triangle"></div>
+
+    <h2 class="login-header">Inscription</h2>
+
+    <form class="login-container" method="post">
+        <p><input type="text" placeholder="Nom d'utilisateur" name="username" required></p>
+        <p><input type="email" placeholder="Email" name="email" required></p>
+        <p><input type="password" placeholder="Mot de passe" name="password" required></p>
+        <p><input type="password" placeholder="Confirmer le mot de passe" name="password2" required></p>
+        <p><input type="submit" value="S'inscrire"></p>
+    </form>
+</div>
 
 <?php
-
-if (isset($_REQUEST['username'], $_REQUEST['email'], $_REQUEST['password'])) {
-    // récupérer le nom d'utilisateur et supprimer les antislashes ajoutés par le formulaire
-    $username = stripslashes($_REQUEST['username']);
-    $username = mysqli_real_escape_string($conn, $username);
-    // récupérer l'email et supprimer les antislashes ajoutés par le formulaire
-    $email = stripslashes($_REQUEST['email']);
-    $email = mysqli_real_escape_string($conn, $email);
-    // récupérer le mot de passe et supprimer les antislashes ajoutés par le formulaire
-    $password = stripslashes($_REQUEST['password']);
-    $password = hash('sha256', mysqli_real_escape_string($conn, $password));
-
-    //requéte SQL + mot de passe crypté
-    $query = "INSERT into `users` (username, email, password) VALUES (?,?,?)";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("sss", $username, $email, $password);
-    // Exécuter la requête sur la base de données
-    $res = $stmt->execute();
-    if ($res) {
-        echo "<div class='sucess'>
-             <h3>Vous êtes inscrit avec succès.</h3>
-             <p>Cliquez ici pour vous <a href='/login'>connecter</a></p>
-       </div>";
-    }
-} else {
-
-    ?>
-
-
-    <div class="login">
-        <div class="login-triangle"></div>
-
-        <h2 class="login-header">Inscription</h2>
-
-        <form class="login-container" action="" method="POST">
-            <p><input type="text" placeholder="Nom d'utilisateur" name="username" required></p>
-            <p><input type="email" placeholder="Email" name="email" required></p>
-            <p><input type="password" placeholder="Password" name="password" required></p>
-            <p><input type="submit" value="S'enregistrer"></p>
-            <p class="box-register">Déjà inscrit? <a href="/login">Connectez-vous ici</a></p>
-        </form>
-    </div>
-
-
-    </form>
-<?php } ?>
-
+if (isset($message)) {
+    echo '<p class="message">'.$message.'</p>';
+}
+?>
 
 </body>
 </html>
+
