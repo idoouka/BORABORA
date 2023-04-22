@@ -9,4 +9,4 @@
     <a href="#"><img src="/src/img/icon-2.jpg" alt="Facebook" title="Facebook"></a>
     <a href="#"><img src="/src/img/icon-3.jpg" alt="Google+" title="Google+"></a>
   </div>
-</footer>	
+</footer>

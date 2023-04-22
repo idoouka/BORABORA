@@ -26,7 +26,7 @@ $routes = array(
 if (array_key_exists($path, $routes)) {
     // Stocke la valeur de $path dans une variable de session
     session_start();
-// On importe le fichier utils.php
+    // On importe le fichier utils.php
     include 'src/php/utils.php';
     $_SESSION['path'] = $path;
 
