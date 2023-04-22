@@ -1,7 +1,5 @@
 <?php
-session_start();
-require_once 'connexion/config.php';
-?>
+require_once 'connexion/config.php'; ?>
 
 <!DOCTYPE html>
 <html lang="fr">

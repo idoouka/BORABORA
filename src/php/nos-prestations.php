@@ -1,11 +1,9 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <title>Nos prestations - Le Bora-Bora</title>
-  <?php include_once 'include/head.php' ?>
+  <?php
+  include_once 'include/head.php'; ?>
 </head>
 <body>
   <?php include_once 'include/navbar.php' ?>
@@ -14,7 +12,7 @@ session_start();
   <section id="content">
     <div class="container_12 top">
       <div class="grid_12 box-1">
-        <img src="../img/page1-img1.png" alt="Picto" />
+        <img src="/src/img/page1-img1.png" alt="Picto" />
         <div class="extra-wrap">
           <h2>LES CHAMBRES</h2>
           <ul class="list-1">
@@ -52,7 +50,7 @@ session_start();
       </div>
       
       <div class="grid_12 box-1">
-        <img src="../img/page1-img1.png" alt="Picto" />
+        <img src="/src/img/page1-img1.png" alt="Picto" />
         <div class="extra-wrap">
           <h2>LES RESTAURANTS &amp; LE BAR</h2>
             <ul class="list-1">
@@ -75,7 +73,7 @@ session_start();
       </div>
       
       <div class="grid_12 box-1">
-        <img src="../img/page1-img1.png" alt="Picto" />
+        <img src="/src/img/page1-img1.png" alt="Picto" />
         <div class="extra-wrap" id="spa">
           <h2>LE SPA</h2>
             <ul class="list-1">
@@ -86,13 +84,13 @@ session_start();
               <li>Le sauna, jacuzzi et la piscine sont en accès libre  aux utilisateurs du SPA (droit d’entrée 3500FCFP, gratuit à toutes personnes faisant un soin).</li>
             </ul>
             <div class="grid_12">
-                <a href="spa.php" class="button">Reserver</a>
+                <a href="/spa" class="button">Reserver</a>
             </div>
         </div>
       </div>
       
       <div class="grid_12 box-1">
-        <img src="../img/page1-img1.png" alt="Picto" />
+        <img src="/src/img/page1-img1.png" alt="Picto" />
         <div class="extra-wrap" id="seminaires">
           <h2>LES SEMINAIRES &amp; MARIAGES</h2>
           <ul class="list-1">

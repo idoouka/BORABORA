@@ -1,21 +1,19 @@
 <?php
 require('config.php');
-session_start();
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <link rel="stylesheet" type="text/css" media="screen" href="css/main.css">
     <title>A propos - Le Bora-Bora</title>
-    <?php include_once '../include/head.php';
-    require_once 'config.php';
+    <?php
+    include_once path_php.'include/head.php';
     ?>
 </head>
 
-
-
 <body>
+<?php include_once path_php.'include/navbar.php' ?>
+
 
 <?php
 if (isset($_POST['username'])){
@@ -38,10 +36,10 @@ if (isset($_POST['username'])){
         $_SESSION['admin'] = $resAdmin;
         $_SESSION['id'] = $resId;
         if ($resAdmin == 1) {
-            header("Location: ../index.php");
+            header("Location: /");
         }
         else{
-            header("Location: ../index.php");
+            header("Location: /");
         }
     }else{
         $message = "Le nom d'utilisateur ou le mot de passe est incorrect.";
@@ -60,29 +58,13 @@ if (isset($_POST['username'])){
         <p><input type="text"  placeholder="Nom d'utilisateur" name="username" required ></p>
         <p><input type="password" placeholder="Password" name="password" required></p>
         <p><input type="submit" value="Log in"></p>
-        <p class="box-register">Vous n'avez pas de compte ?<a href="register.php"> Inscrivez-vous ici</a></p>
+        <p class="box-register">Vous n'avez pas de compte ?<a href="/register"> Inscrivez-vous ici</a></p>
 
     </form>
 </div>
 <?php if (! empty($message)) { ?>
     <p class="errorMessage"><?php echo $message; ?></p>
 <?php } ?>
-
-</form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>

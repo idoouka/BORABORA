@@ -11,3 +11,5 @@ $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 if (mysqli_connect_errno()) {
     die("ERREUR : Impossible de se connecter. " . mysqli_connect_error());
 }
+
+?>

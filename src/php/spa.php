@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once 'connexion/config.php';
 
 // Initialisation de la variable $type
@@ -77,7 +76,7 @@ if (!empty($type)) {
         echo '</td>';
         echo '<td>';
         echo 'Voir le calendrier';
-        echo '<form method="post" action="reservation.php">';
+        echo '<form method="post" action="/reservation">';
         echo '<input type="hidden" name="id" value="'.$row['id'].'">';
         echo '<input type="submit" name="submit" value="Réserver">';
         echo '</form>';

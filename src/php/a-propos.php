@@ -1,11 +1,8 @@
-<?php
-session_start();
-?>  
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <title>A propos - Le Bora-Bora</title>
-  <?php require_once 'include/head.php' ?>
+  <?php require_once 'include/head.php'; ?>
 </head>
 <body>
   <?php include_once 'include/navbar.php' ?>
@@ -14,7 +11,7 @@ session_start();
     <div class="container_12 top">
       
       <div class="grid_12 box-1">
-        <img src="../img/vue.png" alt="" />
+        <img src="/src/img/vue.png" alt="" />
       </div>
       
       <div class="grid_12 box-2 pad-1">

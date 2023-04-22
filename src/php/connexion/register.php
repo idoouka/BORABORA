@@ -2,13 +2,11 @@
 require('config.php');
 ?>
 <?php
-include_once '../include/head.php';
-require_once 'config.php';
+include_once 'src/php/include/head.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <link rel="stylesheet" type="text/css" media="screen" href="css/main.css">
     <title>A propos - Le Bora-Bora</title>
 </head>
 <body>
@@ -35,7 +33,7 @@ if (isset($_REQUEST['username'], $_REQUEST['email'], $_REQUEST['password'])){
     if($res){
         echo "<div class='sucess'>
              <h3>Vous êtes inscrit avec succès.</h3>
-             <p>Cliquez ici pour vous <a href='login.php'>connecter</a></p>
+             <p>Cliquez ici pour vous <a href='/login'>connecter</a></p>
        </div>";
     }
 }else{
@@ -53,7 +51,7 @@ if (isset($_REQUEST['username'], $_REQUEST['email'], $_REQUEST['password'])){
             <p><input type="email" placeholder="Email" name="email" required></p>
             <p><input type="password" placeholder="Password" name="password" required></p>
             <p><input type="submit" value="S'enregistrer"></p>
-            <p class="box-register">Déjà inscrit? <a href="login.php">Connectez-vous ici</a></p>
+            <p class="box-register">Déjà inscrit? <a href="/login">Connectez-vous ici</a></p>
         </form>
     </div>
 

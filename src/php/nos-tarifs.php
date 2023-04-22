@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 require_once 'connexion/config.php';
 
 // Exécution d'une requête, on récupère toues les consommations de disponibles
@@ -33,7 +31,7 @@ $nb_categories = count($prix_par_categorie);
   <section id="content">
     <div class="container_12 top">
       <div class="grid_6 box-1">
-        <img src="../img/page1-img2.png" alt="Picto" />
+        <img src="/src/img/page1-img2.png" alt="Picto" />
         <div class="extra-wrap">
           <h2>LE BAR</h2>
           <ul class="list-1">
@@ -74,7 +72,7 @@ $nb_categories = count($prix_par_categorie);
       </div>
       
       <div class="grid_12 box-1">
-        <img src="../img/page1-img2.png" alt="Picto" />
+        <img src="/src/img/page1-img2.png" alt="Picto" />
         <div class="extra-wrap">
           <h2>...</h2>
             <ul class="list-1">
