@@ -19,6 +19,8 @@ $routes = array(
     '/login' => 'src/php/connexion/login.php',
     '/logout' => 'src/php/connexion/logout.php',
     '/register' => 'src/php/connexion/register.php',
+    '/dashboard' => 'src/php/dashboard.php',
+
     '/404' => 'src/php/404.php'
 );
 
