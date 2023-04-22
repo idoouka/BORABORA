@@ -1,0 +1,6 @@
+#On active la réécriture d'URL
+RewriteEngine On
+#On redirige tout vers le dossier src/php
+RewriteRule ^$ src/php [L]
+#On désactive l'accès aux repertoire
+Options -Indexes

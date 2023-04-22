@@ -1,4 +1,4 @@
 .idea
 .env
-connexion/config.php
+src/php/connexion/config.php
 
