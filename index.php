@@ -40,9 +40,21 @@ $routes = array(
     '/dashboard' => array(
         'file' => 'src/php/dashboard.php'
     ),
-    '/dashboard/user' => array(
+    '/dashboard/user-show' => array(
         'file' => 'src/php/user.php',
-        'function' => 'test'
+        'function' => 'showALL'
+    ),
+    '/dashboard/user-edit' => array(
+        'file' => 'src/php/user.php',
+        'function' => 'edit'
+    ),
+    '/dashboard/user-delete' => array(
+        'file' => 'src/php/user.php',
+        'function' => 'delete'
+    ),
+    '/dashboard/user-add' => array(
+        'file' => 'src/php/user.php',
+        'function' => 'add'
     ),
 
     '/404' => array(
@@ -58,10 +70,11 @@ if (array_key_exists($path, $routes)) {
     include 'src/php/utils.php';
     $_SESSION['path'] = $path;
 
-    // Récupère le fichier correspondant à la route
-    // $route permet de récupérer le tableau associatif de la route
-    // $file permet de récupérer la valeur de la clé 'file' du tableau associatif
-    // $function permet de récupérer la valeur de la clé 'function' du tableau associatif
+//     Récupère le fichier correspondant à la route
+//     $route permet de récupérer le tableau associatif de la route
+//     $file permet de récupérer la valeur de la clé 'file' du tableau associatif
+//     $function permet de récupérer la valeur de la clé 'function' du tableau associatif
+
     $route = $routes[$path];
     $file = $route['file'];
 

@@ -21,7 +21,7 @@ if (isset($_REQUEST['username'],$_REQUEST['email'],$_REQUEST['password'],$_REQUE
         $stmt->bindParam(':username', $username);
         $stmt->execute();
 
-        // Vérifie si la requête a renvoyé un résultat
+        // Vérifie si la re!quête a renvoyé un résultat
         if ($stmt->rowCount() == 0) {
             $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
             $stmt->bindParam(':username', $username);
