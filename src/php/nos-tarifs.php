@@ -1,19 +1,22 @@
 <?php
-require_once 'connexion/config.php';
+use Entity\dbconnect;
+
+require_once 'Entity/dbconnect.php';
+
+$db = new dbconnect();
+$conn = $db->getConnection();
 
 // Exécution d'une requête, on récupère toues les consommations de disponibles
-$requete = "select cc.lib_cat, c.lib_cons, c.prix_cons from consommation c inner join cat_cons cc on cc.cat = c.cat;";
-$resultat = mysqli_query($conn, $requete) or die(mysqli_error($conn)); // or die() est pour la détection des erreurs
+$stmt = $conn->prepare("select cc.lib_cat, c.lib_cons, c.prix_cons from consommation c inner join cat_cons cc on cc.cat = c.cat;");
+// Ajout de or die() pour la detection d'erreur.
+$stmt->execute() or die(print_r($stmt->errorInfo(), true));
+$stmt->execute();
 
 // On rempli un tableau à deux dimensions à partir du résultat de la requête
 $prix_par_categorie = array();
-while ($enregistrement = mysqli_fetch_assoc($resultat)) {
-    $prix_par_categorie[$enregistrement['lib_cat']][] = array(
-        'libelle' => $enregistrement['lib_cons'],
-        'prix' => $enregistrement['prix_cons']
-    );
+while ($row = $stmt->fetch()) {
+    $prix_par_categorie[$row['lib_cat']][] = array('libelle' => $row['lib_cons'], 'prix' => $row['prix_cons']);
 }
-
 // On récupère le nombre de catégories pour gérer l'affichage par colonnes
 $nb_categories = count($prix_par_categorie);
 

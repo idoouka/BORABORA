@@ -19,7 +19,7 @@ class user
     public function createUser($username, $password, $email, $isAdmin = false)
     {
         try {
-            $hashedPassword = hash('sha256',$password);
+            $hashedPassword = hash('sha256', $password);
             $stmt = $this->db->prepare("INSERT INTO users(username, password, email, admin) VALUES(:username, :password, :email, :isAdmin)");
             $stmt->bindParam(":username", $username);
             $stmt->bindParam(":password", $hashedPassword);
@@ -51,9 +51,8 @@ class user
     {
         try {
             if ($updatePassword == true) {
-                $hashedPassword = hash('sha256',$password);
-            }
-            else {
+                $hashedPassword = hash('sha256', $password);
+            } else {
                 $hashedPassword = $password;
             }
             $stmt = $this->db->prepare("UPDATE users SET username=:username, password=:password, email=:email, admin=:isAdmin WHERE id=:id");
@@ -97,4 +96,4 @@ class user
             return false;
         }
     }
-}
+    }
