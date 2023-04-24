@@ -3,14 +3,14 @@
 <head>
     <title>Accueil - Le Bora-Bora</title>
     <?php
-    require_once 'include/head.php'; ?>
+    require_once  path_php.'include/head.php'; ?>
     <link rel="stylesheet" type="text/css" media="screen" href="/src/css/slider.css">
     <script src="/src/js/slider_custom.js"></script>
 </head>
 
 
 <body>
-<?php include_once 'include/navbar.php' ?>
+<?php include_once path_php.'include/navbar.php' ?>
 
 <!--==============================Diaporama================================-->
 <div id="slide">
@@ -106,6 +106,6 @@
 </section>
 
 <!--==============================footer=================================-->
-<?php include_once 'include/footer.php' ?>
+<?php include_once path_php.'include/footer.php' ?>
 </body>
 </html>

@@ -4,7 +4,7 @@ use Entity\dbconnect;
 use Entity\User;
 
 require_once 'Entity/dbconnect.php';
-require_once 'Entity/User.php';
+require_once 'Entity/user.php';
 
 
 function showALL()
@@ -228,8 +228,7 @@ function login()
                 $_SESSION['username'] = $result['username'];
                 $_SESSION['admin'] = $result['admin'];
                 $_SESSION['id'] = $result['id'];
-                header('Location: /');
-                exit;
+                die();
             } else {
                 echo 'mot de passe incorrect';
             }

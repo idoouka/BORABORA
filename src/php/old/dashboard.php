@@ -14,14 +14,6 @@ if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
     </head>
     <body>
     <?php include_once path_php . 'include/navbar.php' ?>
-    <div>
-        <!--        on appelle mon composants ShowALL-->
-        <?php showALL() ?>
-    </div>
-    <div>
-        <!--        on appelle mon composants add-->
-        <?php add() ?>
-    </div>
 
 
     </body>

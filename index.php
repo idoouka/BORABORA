@@ -11,54 +11,51 @@ parse_str($query, $params);
 // Définit les routes de l'application
 $routes = array(
     '/' => array(
-        'file' => 'src/php/home.php'
+        'file' => 'src/php/views/borabora/home.php'
     ),
     '/about' => array(
-        'file' => 'src/php/a-propos.php'
+        'file' => 'src/php/views/borabora/a-propos.php'
     ),
     '/prestations' => array(
-        'file' => 'src/php/nos-prestations.php'
+        'file' => 'src/php/views/borabora/nos-prestations.php'
     ),
-    '/tarifs' => array(
-        'file' => 'src/php/nos-tarifs.php'
-    ),
-    '/spa' => array(
-        'file' => 'src/php/spa.php'
-    ),
-    '/reservation' => array(
-        'file' => 'src/php/reservation.php'
-    ),
+//    '/tarifs' => array(
+//        'file' => 'src/php/nos-tarifs.php'
+//    ),
+//    '/spa' => array(
+//        'file' => 'src/php/spa.php'
+//    ),
+//    '/reservation' => array(
+//        'file' => 'src/php/reservation.php'
+//    ),
+//    '/dashboard' => array(
+//        'file' => 'src/php/dashboard.php'
+//    ),
+//    '/dashboard/user-show' => array(
+//        'file' => 'src/php/user.php',
+//        'function' => 'showALL'
+//    ),
+//    '/dashboard/user-edit' => array(
+//        'file' => 'src/php/user.php',
+//        'function' => 'edit'
+//    ),
+//    '/dashboard/user-delete' => array(
+//        'file' => 'src/php/user.php',
+//        'function' => 'delete'
+//    ),
+//    '/dashboard/user-add' => array(
+//        'file' => 'src/php/user.php',
+//        'function' => 'add'
+//    ),
     '/login' => array(
-        'file' => 'src/php/connexion/login.php'
-    ),
-    '/logout' => array(
-        'file' => 'src/php/connexion/logout.php'
+        'file' => 'src/php/views/users/users-list.php'
     ),
     '/register' => array(
-        'file' => 'src/php/connexion/register.php'
-    ),
-    '/dashboard' => array(
-        'file' => 'src/php/dashboard.php'
-    ),
-    '/dashboard/user-show' => array(
-        'file' => 'src/php/user.php',
-        'function' => 'showALL'
-    ),
-    '/dashboard/user-edit' => array(
-        'file' => 'src/php/user.php',
-        'function' => 'edit'
-    ),
-    '/dashboard/user-delete' => array(
-        'file' => 'src/php/user.php',
-        'function' => 'delete'
-    ),
-    '/dashboard/user-add' => array(
-        'file' => 'src/php/user.php',
-        'function' => 'add'
+        'file' => 'src/php/views/users/register.php'
     ),
 
     '/404' => array(
-        'file' => 'src/php/404.php'
+        'file' => 'src/php/views/utils/404.php'
     )
 );
 
@@ -95,6 +92,6 @@ if (array_key_exists($path, $routes)) {
     }
 } else {
     // Affiche une page d'erreur 404
-    include 'src/php/404.php';
+    include 'src/php/views/utils/404.php';
 }
 ?>

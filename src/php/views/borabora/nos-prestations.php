@@ -3,10 +3,10 @@
 <head>
     <title>Nos prestations - Le Bora-Bora</title>
     <?php
-    include_once 'include/head.php'; ?>
+    include_once path_php.'include/head.php'; ?>
 </head>
 <body>
-<?php include_once 'include/navbar.php' ?>
+<?php include_once path_php.'include/navbar.php' ?>
 
 <!--==============================content================================-->
 <section id="content">
@@ -149,6 +149,6 @@
 </section>
 
 <!--==============================footer=================================-->
-<?php include_once 'include/footer.php' ?>
+<?php include_once path_php.'include/footer.php' ?>
 </body>
 </html>

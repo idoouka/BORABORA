@@ -2,109 +2,101 @@
 
 namespace Entity;
 
-use PDO;
-use PDOException;
-
 class user
 {
-    // Les informations d'identification pour se connecter à la base de données
-    private $db;
+    private ?int $id;
+    private string $username;
+    private string $email;
+    private string $password;
+    private bool $isAdmin;
 
-    public function __construct($db)
+    public function __construct(int $id, string $username, string $email, string $password, bool $isAdmin = false)
     {
-        $this->db = $db;
+        $this->id = $id;
+        $this->username = $username;
+        $this->email = $email;
+        $this->password = $password;
+        $this->isAdmin = $isAdmin;
     }
 
-    // Méthode pour créer un utilisateur
-    public function createUser($username, $password, $email, $isAdmin = false)
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int
     {
-        try {
-            $hashedPassword = hash('sha256', $password);
-            $stmt = $this->db->prepare("INSERT INTO users(username, password, email, admin) VALUES(:username, :password, :email, :isAdmin)");
-            $stmt->bindParam(":username", $username);
-            $stmt->bindParam(":password", $hashedPassword);
-            $stmt->bindParam(":email", $email);
-            $stmt->bindParam(":isAdmin", $isAdmin, PDO::PARAM_BOOL);
-            $stmt->execute();
-            return true;
-        } catch (PDOException $exception) {
-            echo "Erreur lors de la création de l'utilisateur : " . $exception->getMessage();
-            return false;
-        }
+        return $this->id;
     }
 
-    // Méthode pour récupérer tous les utilisateurs
-    public function getUsers()
+    /**
+     * @param int|null $id
+     */
+    public function setId(?int $id): void
     {
-        try {
-            $stmt = $this->db->query("SELECT id, username,password, email, admin FROM users");
-            $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $users;
-        } catch (PDOException $exception) {
-            echo "Erreur lors de la récupération des utilisateurs : " . $exception->getMessage();
-            return false;
-        }
+        $this->id = $id;
     }
 
-    // Méthode pour mettre à jour un utilisateur
-    public function updateUser($id, $username, $password, $email, $Admin = false, $updatePassword)
+    /**
+     * @return string
+     */
+    public function getUsername(): string
     {
-        try {
-            if ($updatePassword == true) {
-                $hashedPassword = hash('sha256', $password);
-            } else {
-                $hashedPassword = $password;
-            }
-            $stmt = $this->db->prepare("UPDATE users SET username=:username, password=:password, email=:email, admin=:isAdmin WHERE id=:id");
-            $stmt->bindParam(":id", $id);
-            $stmt->bindParam(":username", $username);
-            $stmt->bindParam(":password", $hashedPassword);
-            $stmt->bindParam(":email", $email);
-            $stmt->bindParam(":isAdmin", $Admin, PDO::PARAM_BOOL);
-            $stmt->execute();
-            return true;
-        } catch (PDOException $exception) {
-            echo "Erreur lors de la mise à jour de l'utilisateur : " . $exception->getMessage();
-            return false;
-        }
+        return $this->username;
     }
 
-    // Méthode pour supprimer un utilisateur
-    public function deleteUser($id)
+    /**
+     * @param string $username
+     */
+    public function setUsername(string $username): void
     {
-        try {
-            $stmt = $this->db->prepare("DELETE FROM users WHERE id=:id");
-            $stmt->bindParam(":id", $id);
-            $stmt->execute();
-            return true;
-        } catch (PDOException $exception) {
-            echo "Erreur lors de la suppression de l'utilisateur : " . $exception->getMessage();
-            return false;
-        }
+        $this->username = $username;
     }
 
-    public function getUserById($id)
+    /**
+     * @return string
+     */
+    public function getEmail(): string
     {
-        try {
-            $stmt = $this->db->prepare("SELECT id, username,password, email, admin FROM users WHERE id=:id");
-            $stmt->bindParam(":id", $id);
-            $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $exception) {
-            echo "Erreur lors de la récupération de l'utilisateur : " . $exception->getMessage();
-            return false;
-        }
+        return $this->email;
     }
 
-    public function getUserByUsername($username){
-        try {
-            $stmt = $this->db->prepare("SELECT id, username,password, email, admin FROM users WHERE username=:username");
-            $stmt->bindParam(":username", $username);
-            $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $exception) {
-            echo "Erreur lors de la récupération de l'utilisateur : " . $exception->getMessage();
-            return false;
-        }
+    /**
+     * @param string $email
+     */
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
     }
+
+    /**
+     * @return string
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
     }
+
+    /**
+     * @param string $password
+     */
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->isAdmin;
+    }
+
+    /**
+     * @param bool $isAdmin
+     */
+    public function setIsAdmin(bool $isAdmin): void
+    {
+        $this->isAdmin = $isAdmin;
+    }
+
+}

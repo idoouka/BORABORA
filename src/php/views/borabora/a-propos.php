@@ -2,10 +2,10 @@
 <html lang="fr">
 <head>
     <title>A propos - Le Bora-Bora</title>
-    <?php require_once 'include/head.php'; ?>
+    <?php require_once path_php.'include/head.php'; ?>
 </head>
 <body>
-<?php include_once 'include/navbar.php' ?>
+<?php include_once path_php.'include/navbar.php' ?>
 <!--==============================content================================-->
 <section id="content">
     <div class="container_12 top">
@@ -102,6 +102,6 @@
 </section>
 
 <!--==============================footer=================================-->
-<?php include_once 'include/footer.php' ?>
+<?php include_once path_php.'include/footer.php' ?>
 </body>
 </html>
