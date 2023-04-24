@@ -198,6 +198,7 @@ function register_user()
         if ($password == $password2) {
             $user = new user($conn);
             $result = $user->createUser($username, $password, $email);
+            $result = $user->getUserByUsername($username);
             if ($result) {
                 $_SESSION['username'] = $result['username'];
                 $_SESSION['admin'] = $result['admin'];
