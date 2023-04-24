@@ -1,7 +1,3 @@
-<?php
-//require_once 'connexion/config.php';
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>

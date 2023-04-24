@@ -1,32 +1,9 @@
 <?php
-
 use Entity\dbconnect;
+use Entity\spa;
 
 require_once 'Entity/dbconnect.php';
-
-// Initialisation de la variable $type
-$type = '';
-
-// Crée une instance de la classe dbconnect
-$db = new dbconnect();
-
-//On utilise la methode getConnection() pour se connecter à la base de données
-$conn = $db->getConnection();
-
-// Vérifie si le formulaire a été soumis
-if (isset($_POST['type'])) {
-    $type = $_POST['type'];
-
-    // Ajout d'un paramètre search à l'URL
-    header('Location: ?search=' . urlencode($type));
-    exit;
-}
-
-// Vérifie si un paramètre search est présent dans l'URL
-if (isset($_GET['search'])) {
-    $type = urldecode($_GET['search']);
-}
-
+require_once 'Entity/spa.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -36,72 +13,37 @@ if (isset($_GET['search'])) {
     <?php include_once 'include/head.php'; ?>
 </head>
 <body>
-<?php include_once 'include/navbar.php' ?>
-<!--==============================content================================-->
+<?php include_once 'include/navbar.php';
+$db = new dbconnect();
+$conn = $db->getConnection();
 
-<section id="content">
-    <div id="page-content">
-        <form method="post" action="">
-            <label for="type">Type:</label>
-            <select name="type" id="type">
-                <option value="">-----</option>
-                <option value="soins"<?php if ($type == 'soins') echo 'selected="selected"'; ?>>Soins</option>
-                <option value="sauna"<?php if ($type == 'sauna') echo 'selected="selected"'; ?>>Sauna</option>
-                <option value="hammam"<?php if ($type == 'hammam') echo 'selected="selected"'; ?>>Hammam</option>
-            </select>
-            <button type="submit">Rechercher</button>
-        </form>
+$spa = new spa($conn);
+$spa = $spa->getAll();
 
-        <?php
-        // Affiche les résultats uniquement si la variable $type contient une valeur
-        if (!empty($type)) {
-            $sql = "SELECT * FROM spa WHERE type = '$type'";
+//On affiche les données dans un tableau
+//div centrer
+echo '<table id="result">';
+echo '<tr>';
+echo '<th>Id</th>';
+echo '<th>Soin</th>';
+echo '<th>Descriptifs</th>';
+echo '<th>Durée</th>';
+echo '<th>Prix</th>';
+echo '</tr>';
+foreach ($spa as $spa) {
+    echo '<tr>';
+    echo '<td>' . $spa['id'] . '</td>';
+    echo '<td>' . $spa['soin'] . '</td>';
+    echo '<td>' . $spa['descriptifs'] . '</td>';
+    echo '<td>' . $spa['durée'] . '</td>';
+    echo '<td>' . $spa['prix'] . '</td>';
+    echo '</tr>';
+}
+echo '</table>';
+?>
 
-            echo '<table id="result">';
-            echo '<thead>';
-            echo '<tr>';
-            echo '<th>Nom</th>';
-            echo '<th>Descriptif</th>';
-            echo '<th>Durée</th>';
-            echo '<th>Prix</th>';
-            echo '<th>Réservation</th>';
-            echo '</tr>';
-            echo '</thead>';
-            echo '<tbody>';
+<?php include_once 'include/footer.php'; ?>
 
-            foreach ($conn->query($sql) as $row) {
-                echo '<tr>';
-                echo '<td>';
-                echo $row['soin'];
-                echo '</td>';
-                echo '<td>';
-                echo $row['descriptifs'];
-                echo '</td>';
-                echo '<td>';
-                echo $row['durée'] . ' minutes';
-                echo '</td>';
-                echo '<td>';
-                echo $row['prix'] . ' CFP';
-                echo '</td>';
-                echo '<td>';
-                echo 'Voir le calendrier';
-                echo '<form method="post" action="/reservation">';
-                echo '<input type="hidden" name="id" value="' . $row['id'] . '">';
-                echo '<input type="submit" name="submit" value="Réserver">';
-                echo '</form>';
-                echo '</td>';
-                echo '</tr>';
-            }
-
-            echo '</tbody>';
-            echo '</table>';
-        }
-        ?>
-
-    </div>
-</section>
-<!--==============================footer=================================-->
-<?php include_once 'include/footer.php' ?>
 </body>
 </html>
 
