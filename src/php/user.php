@@ -199,11 +199,9 @@ function register_user()
             $user = new user($conn);
             $result = $user->createUser($username, $password, $email);
             if ($result) {
-//                $_SESSION['username'] = $row['username'];
-//                $_SESSION['admin'] = $row['admin'];
-//                $_SESSION['id'] = $row['id'];
-//                var_dump($result);
-                // Rediriger l'utilisateur vers la page de la liste des utilisateurs après la création
+                $_SESSION['username'] = $result['username'];
+                $_SESSION['admin'] = $result['admin'];
+                $_SESSION['id'] = $result['id'];
                 header('Location: /');
                 exit;
             } else {
