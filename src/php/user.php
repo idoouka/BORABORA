@@ -183,4 +183,66 @@ function add()
     echo '<hr>';
 }
 
-?>
+function register_user()
+{
+    if (isset($_REQUEST['username'], $_REQUEST['email'], $_REQUEST['password'], $_REQUEST['password2'])) {
+        $username = $_REQUEST['username'];
+        $email = $_REQUEST['email'];
+        $password = $_REQUEST['password'];
+        $password2 = $_REQUEST['password2'];
+
+        $db = new dbconnect();
+        $conn = $db->getConnection();
+
+
+        if ($password == $password2) {
+            $user = new user($conn);
+            $result = $user->createUser($username, $password, $email);
+            if ($result) {
+//                $_SESSION['username'] = $row['username'];
+//                $_SESSION['admin'] = $row['admin'];
+//                $_SESSION['id'] = $row['id'];
+//                var_dump($result);
+                // Rediriger l'utilisateur vers la page de la liste des utilisateurs après la création
+                header('Location: /');
+                exit;
+            } else {
+                echo "Erreur lors de la création de l'utilisateur.";
+            }
+        }
+    }
+}
+
+function login()
+{
+    if (isset($_REQUEST['username'], $_REQUEST['password'])) {
+        $username = $_REQUEST['username'];
+        $password = $_REQUEST['password'];
+        $password = hash('sha256', $password);
+        $db = new dbconnect();
+        $conn = $db->getConnection();
+        // On récupère les infos de l'utilisateur
+        $user = new user($conn);
+        $result = $user->getUserByUsername($username);
+        if ($result) {
+            if (($password == $result['password'])) {
+                $_SESSION['username'] = $result['username'];
+                $_SESSION['admin'] = $result['admin'];
+                $_SESSION['id'] = $result['id'];
+                header('Location: /');
+                exit;
+            } else {
+                echo 'mot de passe incorrect';
+            }
+        } else {
+            echo 'utilisateur inexistant';
+        }
+
+    }
+//    else {
+//        echo 'pas de formulaire';
+//    }
+
+
+}
+

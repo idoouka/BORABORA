@@ -89,8 +89,19 @@ class user
             $stmt = $this->db->prepare("SELECT id, username,password, email, admin FROM users WHERE id=:id");
             $stmt->bindParam(":id", $id);
             $stmt->execute();
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $user;
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $exception) {
+            echo "Erreur lors de la récupération de l'utilisateur : " . $exception->getMessage();
+            return false;
+        }
+    }
+
+    public function getUserByUsername($username){
+        try {
+            $stmt = $this->db->prepare("SELECT id, username,password, email, admin FROM users WHERE username=:username");
+            $stmt->bindParam(":username", $username);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $exception) {
             echo "Erreur lors de la récupération de l'utilisateur : " . $exception->getMessage();
             return false;

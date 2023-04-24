@@ -1,47 +1,8 @@
 <?php
-use Entity\dbconnect;
-
-require_once path_php.'Entity/dbconnect.php';
-
-// Crée une instance de la classe dbconnect
-$db = new dbconnect();
-
-//On utilise la methode getConnection() pour se connecter à la base de données
-$conn = $db->getConnection();
-
-if (isset($_REQUEST['username'],$_REQUEST['email'],$_REQUEST['password'],$_REQUEST['password2'])) {
-    $username = $_REQUEST['username'];
-    $email = $_REQUEST['email'];
-    $password = $_REQUEST['password'];
-    $password2 = $_REQUEST['password2'];
-
-    if ($password == $password2) {
-        // Prépare la requête SQL
-        $stmt = $conn->prepare("SELECT username FROM users WHERE username = :username");
-        $stmt->bindParam(':username', $username);
-        $stmt->execute();
-
-        // Vérifie si la re!quête a renvoyé un résultat
-        if ($stmt->rowCount() == 0) {
-            $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
-            $stmt->bindParam(':username', $username);
-            $stmt->bindParam(':email', $email);
-            $hash = hash('sha256', $password);
-            $stmt->bindParam(':password', $hash);
-            $stmt->execute();
-
-            // Redirige l'utilisateur vers la page de connexion
-            header("Location: /login");
-            exit;
-        } else {
-            $message = "Ce nom d'utilisateur est déjà utilisé.";
-        }
-    } else {
-        $message = "Les mots de passe ne correspondent pas.";
-    }
-}
+include_once path_php.'user.php';
+//on importe le composant d'inscriptions
+register_user();
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
