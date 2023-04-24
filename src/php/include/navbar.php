@@ -18,7 +18,7 @@
         top: 100%;
         left: -20px;
         width: calc(100% + 50px);
-        height: calc(100% + 70px);
+        height: calc(100% + 100px);
         z-index: 1;
         background-color: #323337;
     }
@@ -49,6 +49,9 @@
                             </li>
                             <li>
                                 <a href="/tarifs">Nos tarifs</a>
+                            </li>
+                            <li>
+                                <a href="/spa">Spa</a>
                             </li>
                         </ul>
                     </li>
