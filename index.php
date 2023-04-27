@@ -19,34 +19,12 @@ $routes = array(
     '/prestations' => array(
         'file' => 'src/php/views/borabora/nos-prestations.php'
     ),
-//    '/tarifs' => array(
-//        'file' => 'src/php/nos-tarifs.php'
-//    ),
-//    '/spa' => array(
-//        'file' => 'src/php/spa.php'
-//    ),
-//    '/reservation' => array(
-//        'file' => 'src/php/reservation.php'
-//    ),
-//    '/dashboard' => array(
-//        'file' => 'src/php/dashboard.php'
-//    ),
-//    '/dashboard/user-show' => array(
-//        'file' => 'src/php/user.php',
-//        'function' => 'showALL'
-//    ),
-//    '/dashboard/user-edit' => array(
-//        'file' => 'src/php/user.php',
-//        'function' => 'edit'
-//    ),
-//    '/dashboard/user-delete' => array(
-//        'file' => 'src/php/user.php',
-//        'function' => 'delete'
-//    ),
-//    '/dashboard/user-add' => array(
-//        'file' => 'src/php/user.php',
-//        'function' => 'add'
-//    ),
+    '/spa' => array(
+        'file' => 'src/php/views/borabora/spa.php'
+    ),
+    '/tarifs' =>array(
+        'file' => 'src/php/views/borabora/tarifs.php'
+    ),
     '/login' => array(
         'file' => 'src/php/views/users/users-list.php'
     ),

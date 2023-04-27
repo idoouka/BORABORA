@@ -2,66 +2,52 @@
 
 namespace Controller;
 
+use Entity\dbconnect;
+use Entity\spa;
+
+include_once path_php . '/Entity/dbconnect.php';
+include_once path_php . '/Entity/spa.php';
+
 class SpaController
 {
-    private $db;
+    private dbconnect $db;
 
-    public function __construct(PDO $db)
+    public function __construct()
     {
-        $this->db = $db;
+        // On instancie un objet de la classe dbconnect pour se connecter à la base de données
+        $this->db = new dbconnect();
     }
 
-    public function getAll()
+    public function showAll()
     {
-        $stmt = $this->db->prepare("SELECT * FROM spa");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // On récupère tous les spas de la base de données
+        $stmt = $this->db->getConnection()->prepare("SELECT * FROM spa");
+
+        $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+
+        $spas = array();
+
+        while ($row = $stmt->fetch()) {
+            $spas[] = new spa($row['soin'], $row['descriptifs'], $row['durée'], $row['prix'], $row['type'], $row['id']);
+        }
+
+        // On inclut le fichier de vue qui affiche les spas
+        include path_php.'views/spa/showAll.php';
     }
 
-    public function getById($id)
-    {
-        $stmt = $this->db->prepare("SELECT * FROM spa WHERE id = :id");
-        $stmt->bindValue(":id", $id);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
 
-    public function create($soin, $descriptifs, $duree, $prix, $type)
+    public function showById($id)
     {
-        $stmt = $this->db->prepare("INSERT INTO spa (soin, descriptifs, durée, prix, type) VALUES (:soin, :descriptifs, :duree, :prix, :type)");
-        $stmt->bindValue(":soin", $soin);
-        $stmt->bindValue(":descriptifs", $descriptifs);
-        $stmt->bindValue(":duree", $duree);
-        $stmt->bindValue(":prix", $prix);
-        $stmt->bindValue(":type", $type);
-        return $stmt->execute();
-    }
+        // On récupère le spa correspondant à l'id passé en paramètre
+        $stmt = $this->db->getConnection()->prepare("SELECT * FROM spa WHERE id = :id");
 
-    public function update($id, $soin, $descriptifs, $duree, $prix, $type)
-    {
-        $stmt = $this->db->prepare("UPDATE spa SET soin = :soin, descriptifs = :descriptifs, durée = :duree, prix = :prix, type = :type WHERE id = :id");
-        $stmt->bindValue(":id", $id);
-        $stmt->bindValue(":soin", $soin);
-        $stmt->bindValue(":descriptifs", $descriptifs);
-        $stmt->bindValue(":duree", $duree);
-        $stmt->bindValue(":prix", $prix);
-        $stmt->bindValue(":type", $type);
-        return $stmt->execute();
-    }
+        $stmt->bindParam(':id', $id);
 
-    public function delete($id)
-    {
-        $stmt = $this->db->prepare("DELETE FROM spa WHERE id = :id");
-        $stmt->bindValue(":id", $id);
-        return $stmt->execute();
-    }
+        $stmt->execute() or die(print_r($stmt->errorInfo(), true));
 
-    public function getByType($type)
-    {
-        $stmt = $this->db->prepare("SELECT * FROM spa WHERE type = :type");
-        $stmt->bindValue(":type", $type);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $row = $stmt->fetch();
+
+        return new spa($row['soin'], $row['descriptifs'], $row['duree'], $row['prix'], $row['type'], $row['id']);
     }
 
 }
