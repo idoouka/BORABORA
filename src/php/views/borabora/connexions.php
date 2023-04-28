@@ -1,15 +1,24 @@
 <?php
 use Controller\UserController;
-include_once path_php.'/Controller/UserController.php';
+include_once path_php . '/Controller/UserController.php';
 
 $userController = new UserController();
 
 $userController->login_user();
 
 ?>
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+        <title>Inscription - Le Bora-Bora</title>
+        <?php
+        require_once path_php . 'include/head.php'; ?>
+    </head>
 
+<body>
+<?php include_once path_php.'include/navbar.php' ?>
 
-<h1>Connexion</h1>
+<h2>Connexion</h2>
 <!-- Form de connexion -->
 <form action="" method="post">
     <div class="form-group">
@@ -27,3 +36,6 @@ $userController->login_user();
 <?php if (! empty($message)) { ?>
     <p class="errorMessage"><?php echo $message; ?></p>
 <?php } ?>
+
+<?php include_once path_php.'include/footer.php' ?>
+</body>

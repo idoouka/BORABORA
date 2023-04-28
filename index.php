@@ -26,13 +26,13 @@ $routes = array(
         'file' => 'src/php/views/borabora/tarifs.php'
     ),
     '/login' => array(
-        'file' => 'src/php/views/users/connexions.php'
+        'file' => 'src/php/views/borabora/connexions.php'
     ),
     '/register' => array(
-        'file' => 'src/php/views/users/register.php'
+        'file' => 'src/php/views/borabora/register.php'
     ),
     '/logout' => array(
-        'file' => 'src/php/views/users/logout.php'
+        'file' => 'src/php/views/borabora/logout.php'
     ),
     '/404' => array(
         'file' => 'src/php/views/utils/404.php'

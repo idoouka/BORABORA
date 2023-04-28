@@ -1,6 +1,8 @@
 <?php
+
 use Controller\UserController;
-include_once path_php.'/Controller/UserController.php';
+
+include_once path_php . '/Controller/UserController.php';
 
 $userController = new UserController();
 
@@ -8,6 +10,18 @@ $userController->register();
 
 ?>
 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Login - Le Bora-Bora</title>
+    <?php
+    require_once path_php . 'include/head.php'; ?>
+</head>
+
+<body>
+<?php include_once path_php.'include/navbar.php' ?>
+
+<h2>Inscriptions</h2>
 <form action="" method="post">
     <div class="form-group">
         <label for="username">Nom d'utilisateur</label>
@@ -23,12 +37,15 @@ $userController->register();
     </div>
     <div class="form-group">
         <label for="password_confirm">Confirmez votre mot de passe</label>
-        <input type="password" name="password_confirm" id="password_confirm" class="form-control" placeholder="Confirmez votre mot de passe">
+        <input type="password" name="password_confirm" id="password_confirm" class="form-control"
+               placeholder="Confirmez votre mot de passe">
     </div>
     <button type="submit" name="submit" class="btn btn-primary">Se connecter</button>
-    <p class="box-register">Vous n'avez pas de compte ?<a href="/register"> Inscrivez-vous ici</a></p>
 </form>
 
-<?php if(isset($error)): ?>
+<?php if (isset($error)): ?>
     <div><?php echo $error; ?></div>
 <?php endif; ?>
+
+<?php include_once path_php.'include/footer.php' ?>
+</body>
