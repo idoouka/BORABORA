@@ -108,5 +108,13 @@ class UserController
         }
         return "";
     }
+
+    public function delete($id)
+    {
+        $stmt = $this->db->prepare("DELETE FROM users WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+        header('Location: /');
+    }
 }
 
