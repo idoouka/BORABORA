@@ -34,6 +34,9 @@ $routes = array(
     '/logout' => array(
         'file' => 'src/php/views/borabora/logout.php'
     ),
+    '/dashboard' => array(
+        'file' => 'src/php/views/dashboard/mainDashboard.php'
+    ),
     '/404' => array(
         'file' => 'src/php/views/utils/404.php'
     )

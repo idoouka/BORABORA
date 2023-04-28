@@ -7,7 +7,11 @@ foreach ($users as $user) {
     echo "<td>" . $user->getUsername() . "</td>";
     echo "<td>" . $user->getEmail() . "</td>";
     echo "<td>" . $user->getPassword() . "</td>";
-    echo "<td>" . $user->isAdmin() . "</td>";
+    if ($user->isAdmin() == 1) {
+        echo "<td>admin</td>";
+    } else {
+        echo "<td>user</td>";
+    }
     echo "</tr>";
     echo "</table>";
 }
