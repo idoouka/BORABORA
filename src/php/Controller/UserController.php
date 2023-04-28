@@ -47,4 +47,66 @@ class UserController
             echo "L'utilisateur avec l'ID $id n'existe pas.";
         }
     }
+
+    // Ajout d'un utilisateur
+    public function login_user()
+    {
+        if (isset($_POST['submit'])) {
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            $password = hash('sha256', $password);
+
+            $stmt = $this->db->prepare("SELECT * FROM users WHERE username = :username AND password = :password");
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':password', $password);
+            $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+            $row = $stmt->fetch();
+            if ($row) {
+                $_SESSION['username'] = $row['username'];
+                $_SESSION['admin'] = $row['admin'];
+                $_SESSION['id'] = $row['id'];
+                header('Location: /');
+            } else {
+                echo "L'utilisateur n'existe pas.";
+            }
+        }
+    }
+
+
+    public function register()
+    {
+        if (isset($_POST['submit'])) {
+            $username = $_POST['username'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $password_confirm = $_POST['password_confirm'];
+            $password = hash('sha256', $password);
+            $password_confirm = hash('sha256', $password_confirm);
+
+            if (!empty($username) && !empty($email) && !empty($password) && !empty($password_confirm)) {
+                if ($password == $password_confirm) {
+                    $stmt = $this->db->prepare("SELECT * FROM users WHERE username = :username");
+                    $stmt->bindParam(':username', $username);
+                    $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+                    $row = $stmt->fetch();
+                    if (!$row) {
+                        $stmt = $this->db->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
+                        $stmt->bindParam(':username', $username);
+                        $stmt->bindParam(':email', $email);
+                        $stmt->bindParam(':password', $password);
+                        $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+                        header('Location: /');
+                    } else {
+                        return "L'utilisateur existe déjà.";
+                    }
+                } else {
+                    return "Les mots de passe ne correspondent pas.";
+                }
+            } else {
+                return "Veuillez remplir tous les champs.";
+            }
+        }
+        return "";
+    }
 }
+
