@@ -116,5 +116,43 @@ class UserController
         $stmt->execute() or die(print_r($stmt->errorInfo(), true));
         header('Location: /');
     }
+
+    public function edit()
+    {
+        if (isset($_POST['submit'])) {
+            $id = $_POST['id'];
+            $username = $_POST['username'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $password_confirm = $_POST['password_confirm'];
+            $password = hash('sha256', $password);
+            $password_confirm = hash('sha256', $password_confirm);
+
+            if (!empty($username) && !empty($email) && !empty($password) && !empty($password_confirm)) {
+                if ($password == $password_confirm) {
+                    $stmt = $this->db->prepare("SELECT * FROM users WHERE username = :username");
+                    $stmt->bindParam(':username', $username);
+                    $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+                    $row = $stmt->fetch();
+                    if (!$row) {
+                        $stmt = $this->db->prepare("UPDATE users SET username = :username, email = :email, password = :password WHERE id = :id");
+                        $stmt->bindParam(':username', $username);
+                        $stmt->bindParam(':email', $email);
+                        $stmt->bindParam(':password', $password);
+                        $stmt->bindParam(':id', $id);
+                        $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+                        header('Location: /');
+                    } else {
+                        return "L'utilisateur existe déjà.";
+                    }
+                } else {
+                    return "Les mots de passe ne correspondent pas.";
+                }
+            } else {
+                return "Veuillez remplir tous les champs.";
+            }
+        }
+        return "";
+    }
 }
 

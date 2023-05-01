@@ -55,6 +55,9 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="/calendrier">Calendrier</a>
+                    </li>
                     <?php
                     if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
                         echo "<li><a class='current' href='/dashboard'>Dashboard</a></li>";

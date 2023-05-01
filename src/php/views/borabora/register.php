@@ -17,8 +17,8 @@ $userController->register();
     <?php
     require_once path_php . 'include/head.php'; ?>
 </head>
-
 <body>
+
 <?php include_once path_php.'include/navbar.php' ?>
 
 <h2>Inscriptions</h2>
@@ -49,3 +49,4 @@ $userController->register();
 
 <?php include_once path_php.'include/footer.php' ?>
 </body>
+</html>

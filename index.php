@@ -25,6 +25,9 @@ $routes = array(
     '/tarifs' =>array(
         'file' => 'src/php/views/borabora/tarifs.php'
     ),
+    '/calendrier' => array(
+        'file' => 'src/php/views/borabora/calendrier.php'
+    ),
     '/login' => array(
         'file' => 'src/php/views/borabora/connexions.php'
     ),
@@ -37,6 +40,9 @@ $routes = array(
     '/dashboard' => array(
         'file' => 'src/php/views/dashboard/mainDashboard.php'
     ),
+    '/dashboard/update-admin' => array(
+        'file' => 'src/php/views/dashboard/editAdminUser.php'
+    ),
     '/404' => array(
         'file' => 'src/php/views/utils/404.php'
     )
@@ -46,8 +52,8 @@ $routes = array(
 if (array_key_exists($path, $routes)) {
     // Stocke la valeur de $path dans une variable de session
     session_start();
-    // On importe le fichier utils.php
-    include 'src/php/utils.php';
+    // On importe le fichier bootstrap.php
+    include 'src/php/bootstrap.php';
     $_SESSION['path'] = $path;
 
 //     Récupère le fichier correspondant à la route
