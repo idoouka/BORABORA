@@ -31,6 +31,9 @@ $routes = array(
     '/evenement' => array(
         'file' => 'src/php/views/calendar/event.php'
     ),
+    '/reservation' => array(
+        'file' => 'src/php/views/spa/reserver.php'
+    ),
     '/login' => array(
         'file' => 'src/php/views/borabora/connexions.php'
     ),

@@ -23,6 +23,7 @@ $weeks = $month->getWeeks();
 $end = (clone $start)->modify('+' . (6 + 7 * ($weeks - 1)) . ' days');
 $events = $events->getEventsBetweenByDay($start, $end);
 $start = $start->format('N') === '1' ? $start : $month->getStartingDay()->modify('last monday');
+$today = $month->getToDay();
 
 ?>
 <div class="div">
@@ -35,6 +36,7 @@ $start = $start->format('N') === '1' ? $start : $month->getStartingDay()->modify
     </div>
 </div>
 
+
 <table class="calendar__table calendar__table--<?= $weeks; ?>weeks">
     <?php for ($i = 0; $i < $weeks; $i++): ?>
         <tr>
@@ -42,11 +44,11 @@ $start = $start->format('N') === '1' ? $start : $month->getStartingDay()->modify
                 $date = (clone $start)->modify("+" . ($k + $i * 7) . " days");
                 $eventsForDay = $events[$date->format('Y-m-d')] ?? [];
                 ?>
-                <td class="<?= $month->withinMonth($date) ? "" : "calendar__othermonfs"; ?>">
-<!--                    --><?php //if ($i == 0): ?>
-                    <div class="calendar__weekday"><?= $day; ?></div>
-<!--                    --><?php //endif; ?>
-                    <div class="calendar__day"><?= $date->format('d'); ?></div>
+                <td class="<?= $month->withinMonth($date) ? "" : "calendar__othermonfs"; ?> ">
+                    <?php if ($i == 0): ?>
+                        <div class="calendar__weekday"><?= $day; ?></div>
+                    <?php endif; ?>
+                    <div class="calendar__day <?= $date->format('Y-m-d') == $today->format('Y-m-d') ? "calendar__flag" : ""; ?>"><?= $date->format('d'); ?></div>
                     <?php foreach ($eventsForDay as $event): ?>
                         <div class="calendar__event">
                             <?= (new DateTime($event['start']))->format('H:i') ?> - <a
@@ -58,8 +60,6 @@ $start = $start->format('N') === '1' ? $start : $month->getStartingDay()->modify
         </tr>
     <?php endfor; ?>
 </table>
-
-
 <?php include_once path_php . 'include/footer.php' ?>
 </body>
 </html>

@@ -7,6 +7,7 @@
         <th>Durée</th>
         <th>Prix</th>
         <th>Type</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -18,6 +19,7 @@
             <td><?= $spa->getDuree() ?></td>
             <td><?= $spa->getPrix() ?></td>
             <td><?= $spa->getType() ?></td>
+            <td><a href="/reservation?id=<?= $spa->getId() ?>">Réserver</a></td>
         </tr>
     <?php endforeach; ?>
     </tbody>

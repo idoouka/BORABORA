@@ -32,7 +32,7 @@ class SpaController
         }
 
         // On inclut le fichier de vue qui affiche les spas
-        include path_php.'views/spa/showAll.php';
+        include path_php . 'views/spa/showAll.php';
     }
 
 
@@ -47,7 +47,44 @@ class SpaController
 
         $row = $stmt->fetch();
 
-        return new spa($row['soin'], $row['descriptifs'], $row['duree'], $row['prix'], $row['type'], $row['id']);
+        return new spa($row['soin'], $row['descriptifs'], $row['durée'], $row['prix'], $row['type'], $row['id']);
+    }
+
+    public function reserver($id)
+    {
+        if (!isset($_SESSION['username'])) {
+            header('Location: /login');
+        }
+        $username = $_SESSION['username'];
+
+
+        // On récupère le spa correspondant à l'id passé en paramètre
+        $spa = $this->showById($id);
+
+
+        // On récupère l'id du user
+        $stmt = $this->db->getConnection()->prepare("SELECT id FROM users WHERE username = :username");
+        $stmt->bindParam(':username', $username);
+        $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+        $row = $stmt->fetch();
+        $id_user = $row['id'];
+
+
+        // On récupère l'id du spa
+        $id_spa = $spa->getId();
+
+        //On récupère les dates de début et de fin de la réservation
+        if (isset($_POST['start']) && isset($_POST['end'])) {
+            $start = $_POST['start'];
+            $end = $_POST['end'];
+        } else {
+            $start = date('Y-m-d\TH:i', strtotime('now'));
+            $end = date('Y-m-d\TH:i', strtotime('now'));
+        }
+
+//        dd('start'.$start, 'end'.$end, 'user'.$id_user, 'sap'.$id_spa);
+        // On insère la réservation dans la base de données
+
     }
 
 }

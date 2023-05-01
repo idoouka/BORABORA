@@ -72,4 +72,10 @@ class CalendarController
         }
         return new CalendarController($month, $year);
     }
+
+    public function getToDay()
+    {
+        return new \DateTime('now');
+
+    }
 }

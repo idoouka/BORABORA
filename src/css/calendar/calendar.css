@@ -33,6 +33,11 @@
  opacity: 40%;
 }
 
+.calendar__flag
+{
+    color: dodgerblue;
+    opacity: 60%;
+}
 .button_group_center
 {
     display: block;
