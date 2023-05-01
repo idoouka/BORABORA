@@ -14,5 +14,22 @@ function dd(...$vars){
     }
 }
 
+function h(?string $value): string
+{
+    if ($value === null) {
+        return '';
+    }
+    return htmlentities($value);
+}
 
+function render_include(string $view, $parameters = [])
+{
+    extract($parameters);
+    include path_php . 'include/' . $view . '.php';
+}
+function render(string $view, $parameters = [])
+{
+    extract($parameters);
+    include path_php . 'views/' . $view . '.php';
+}
 ?>

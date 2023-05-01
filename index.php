@@ -28,6 +28,9 @@ $routes = array(
     '/calendrier' => array(
         'file' => 'src/php/views/borabora/calendrier.php'
     ),
+    '/evenement' => array(
+        'file' => 'src/php/views/calendar/event.php'
+    ),
     '/login' => array(
         'file' => 'src/php/views/borabora/connexions.php'
     ),
